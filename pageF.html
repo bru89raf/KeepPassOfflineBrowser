@@ -56,13 +56,6 @@
 
     <div class="col-lg-12">
         <div class="well">
-            <!--<h4>New Line</h4>-->
-
-            <!--<button type="button" id="btnOptions" class="btn btn-primary" title="Options" data-toggle="modal"-->
-            <!--data-target="#optionsModal">-->
-            <!--<i class="fa fa-desktop"></i>-->
-            <!--</button>-->
-            <!--<p></p>-->
 
             <form class="form-inline" role="form">
 
@@ -70,7 +63,6 @@
                         data-target="#optionsModal">
                     <i class="fa fa-desktop"></i>
                 </button>
-
 
                 <button type="button" id="btnCleanFields" class="btn btn-warning" title="Clean Fields">
                     <i class="fa fa-fire-extinguisher"></i>
@@ -246,8 +238,92 @@
     var insertLineString = 'Element <b>Inserted</b> with <b>Success</b>';
 
 
-    var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
-
+    var Base64 = {
+        _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
+            var t = "";
+            var n, r, i, s, o, u, a;
+            var f = 0;
+            e = Base64._utf8_encode(e);
+            while (f < e.length) {
+                n = e.charCodeAt(f++);
+                r = e.charCodeAt(f++);
+                i = e.charCodeAt(f++);
+                s = n >> 2;
+                o = (n & 3) << 4 | r >> 4;
+                u = (r & 15) << 2 | i >> 6;
+                a = i & 63;
+                if (isNaN(r)) {
+                    u = a = 64
+                } else if (isNaN(i)) {
+                    a = 64
+                }
+                t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+            }
+            return t
+        }, decode: function (e) {
+            var t = "";
+            var n, r, i;
+            var s, o, u, a;
+            var f = 0;
+            e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+            while (f < e.length) {
+                s = this._keyStr.indexOf(e.charAt(f++));
+                o = this._keyStr.indexOf(e.charAt(f++));
+                u = this._keyStr.indexOf(e.charAt(f++));
+                a = this._keyStr.indexOf(e.charAt(f++));
+                n = s << 2 | o >> 4;
+                r = (o & 15) << 4 | u >> 2;
+                i = (u & 3) << 6 | a;
+                t = t + String.fromCharCode(n);
+                if (u != 64) {
+                    t = t + String.fromCharCode(r)
+                }
+                if (a != 64) {
+                    t = t + String.fromCharCode(i)
+                }
+            }
+            t = Base64._utf8_decode(t);
+            return t
+        }, _utf8_encode: function (e) {
+            e = e.replace(/\r\n/g, "\n");
+            var t = "";
+            for (var n = 0; n < e.length; n++) {
+                var r = e.charCodeAt(n);
+                if (r < 128) {
+                    t += String.fromCharCode(r)
+                } else if (r > 127 && r < 2048) {
+                    t += String.fromCharCode(r >> 6 | 192);
+                    t += String.fromCharCode(r & 63 | 128)
+                } else {
+                    t += String.fromCharCode(r >> 12 | 224);
+                    t += String.fromCharCode(r >> 6 & 63 | 128);
+                    t += String.fromCharCode(r & 63 | 128)
+                }
+            }
+            return t
+        }, _utf8_decode: function (e) {
+            var t = "";
+            var n = 0;
+            var r = c1 = c2 = 0;
+            while (n < e.length) {
+                r = e.charCodeAt(n);
+                if (r < 128) {
+                    t += String.fromCharCode(r);
+                    n++
+                } else if (r > 191 && r < 224) {
+                    c2 = e.charCodeAt(n + 1);
+                    t += String.fromCharCode((r & 31) << 6 | c2 & 63);
+                    n += 2
+                } else {
+                    c2 = e.charCodeAt(n + 1);
+                    c3 = e.charCodeAt(n + 2);
+                    t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+                    n += 3
+                }
+            }
+            return t
+        }
+    }
 
 
     $(document).ready(function () {
@@ -467,7 +543,7 @@
 
 
         if (url != undefined) {
-            var messageLink  = 'Open Link';
+            var messageLink = 'Open Link';
             if (url.search('http') == 0) {
                 tblbodyline += '<td> <a target="_blank" href=' + url + '>' + messageLink.link(url) + ' </a> </td>';
             } else {
@@ -603,7 +679,7 @@
             updateID = id;
             $(txtApp).val(app);
             $(txtUser).val(user);
-            $(txtPwd).val(pwd );
+            $(txtPwd).val(pwd);
             $(txtUrl).val(url);
             $(txtDesc).val(desc);
             scrollUp();
@@ -624,7 +700,6 @@
 //            scrollUp();
 
         });
-
 
 
         $('#tableListAllInfo tr td .btnCopyToClipboard').on('mousedown', function (event) {
@@ -648,7 +723,6 @@
 
             }
 
-
         });
 
 
@@ -669,10 +743,6 @@
         if (typeof msgElem === "string") {
             msgElem = document.getElementById(msgElem);
         }
-//        msgElem.innerHTML = msg;
-//        setTimeout(function () {
-//            msgElem.innerHTML = "";
-//        }, 2000);
     }
 
 
@@ -733,20 +803,11 @@
         //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
         var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
 
-        console.log(arrData);
-
         var CSV = '';
-        //Set Report title in first row or line
-
-//        CSV += ReportTitle + '\r\n\n';
-
-        //This condition will generate the Label/Header
-
         var row = "";
 
         //This loop will extract the label from 1st index of on array
         for (var index in arrData[0]) {
-
             //Now convert each value to string and comma-seprated
             row += index + ',';
         }
@@ -770,15 +831,13 @@
         //this will remove the blank-spaces from the title and replace it with an underscore
         fileName += ReportTitle.replace(/ /g, "_");
 
-        //Initialize file format you want csv or xls
-//        var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
         var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
 
+        // NOTES:
         // Now the little tricky part.
         // you can use either>> window.open(uri);
-        // but this will not work in some browsers
+        // but this will not work in some browsers --> IE
         // or you will not get the correct file extension
-
         //this trick will generate a temp <a /> tag
         var link = document.createElement("a");
         link.href = uri;
@@ -828,24 +887,15 @@
                     var table = document.createElement("table");
                     var rows = e.target.result.split("\n");
 
-
                     var firstLine = rows[0].split(',');
                     var firstColumn = firstLine[0];
 
                     for (var i = 1; i < rows.length - 1; i++) {
-                        //n estamos a apanhar a linha de cabeçalho
-
-
+                        //Dont get header line
                         var row = table.insertRow(-1);
                         var cells = rows[i].split(",");
 
                         var newLineTemp = {};
-//                        newLineTemp.id = cells[0];
-//                        newLineTemp.application = cells[1];
-//                        newLineTemp.user = cells[2];
-//                        newLineTemp.pwd = cells[3];
-//                        newLineTemp.url = cells[4];
-//                        newLineTemp.desc = cells[5];
 
                         //VERIFICAR SE EXISTE COLUNA DO ID
 
@@ -865,13 +915,6 @@
                             if (cells[4] != undefined) newLineTemp.desc = cells[5]; else newLineTemp.desc = "";
 
                         }
-
-                        //if (cells[0] != undefined) newLineTemp.id = cells[0]; else  newLineTemp.id = getDateTime();
-                        //if (cells[1] != undefined) newLineTemp.application = cells[1]; else newLineTemp.application = "";
-                        //if (cells[2] != undefined) newLineTemp.user = cells[2]; else newLineTemp.user = "";
-                        //if (cells[3] != undefined) newLineTemp.pwd = cells[3]; else newLineTemp.pwd = "";
-                        //if (cells[4] != undefined) newLineTemp.url = cells[4]; else newLineTemp.url = "";
-                        //if (cells[5] != undefined) newLineTemp.desc = cells[5]; else newLineTemp.desc = "";
 
                         arrayTempImport.push(newLineTemp);
 
@@ -903,93 +946,27 @@
     }
 
 
-    //    function CSVtoJSONConvertor() {
-    //        var csvFile = '';
-    //
-    //        var fileUpload = document.getElementById("importfile");
-    //        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv)$/;
-    //
-    //        if (regex.test(fileUpload.value.toLowerCase())) {
-    //            if (typeof (FileReader) != "undefined") {
-    //                var reader = new FileReader();
-    //                reader.onload = function (e) {
-    //                    try {
-    //                        var jsonFile = e.target.result;
-    //                        var jsonObjectFromFile = jQuery.parseJSON(jsonFile);
-    //
-    //
-    //                        console.log(jsonObjectFromFile)
-    //
-    //
-    //                    } catch (err) {
-    //                        $('.alertFileError').show();
-    //                        console.log(err);
-    //                    }
-    //                }
-    //                reader.readAsText(fileUpload.files[0]);
-    //            } else {
-    //                alert("This browser does not support HTML5.");
-    //            }
-    //        } else {
-    //            alert("Please upload a valid CSV file.");
-    //        }
-    //
-    //
-    //        //console.log(CSV2JSON(csvFile));
-    //
-    //
-    //    }
-
-
     function CSVToArray(strData, strDelimiter) {
-        // Check to see if the delimiter is defined. If not,
-        // then default to comma.
         strDelimiter = (strDelimiter || ",");
-        // Create a regular expression to parse the CSV values.
         var objPattern = new RegExp((
-                // Delimiters.
-        "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
-        // Quoted fields.
-        "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
-        // Standard fields.
-        "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
-        // Create an array to hold our data. Give the array
-        // a default empty first row.
+            "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+            "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+            "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
         var arrData = [[]];
-        // Create an array to hold our individual pattern
-        // matching groups.
         var arrMatches = null;
-        // Keep looping over the regular expression matches
-        // until we can no longer find a match.
         while (arrMatches = objPattern.exec(strData)) {
-            // Get the delimiter that was found.
             var strMatchedDelimiter = arrMatches[1];
-            // Check to see if the given delimiter has a length
-            // (is not the start of string) and if it matches
-            // field delimiter. If id does not, then we know
-            // that this delimiter is a row delimiter.
             if (strMatchedDelimiter.length && (strMatchedDelimiter != strDelimiter)) {
-                // Since we have reached a new row of data,
-                // add an empty row to our data array.
                 arrData.push([]);
             }
-            // Now that we have our delimiter out of the way,
-            // let's check to see which kind of value we
-            // captured (quoted or unquoted).
             if (arrMatches[2]) {
-                // We found a quoted value. When we capture
-                // this value, unescape any double quotes.
                 var strMatchedValue = arrMatches[2].replace(
                         new RegExp("\"\"", "g"), "\"");
             } else {
-                // We found a non-quoted value.
                 var strMatchedValue = arrMatches[3];
             }
-            // Now that we have our value string, let's add
-            // it to the data array.
             arrData[arrData.length - 1].push(strMatchedValue);
         }
-        // Return the parsed data.
         return (arrData);
     }
 
@@ -1035,11 +1012,9 @@
         $(warningType + ' h5').append(messageShow);
         $(warningType).show();
 
-
         if (isfadeout) {
             $(warningType).delay(1500).fadeOut(300);
         }
-
 
     }
 
@@ -1064,7 +1039,6 @@
         if ($(lableWarning).is(':visible')) $(lableWarning).hide();
         if ($(lableWarningDanger).is(':visible')) $(lableWarningDanger).hide();
         if ($(lableWarningSuccess).is(':visible')) $(lableWarningSuccess).hide();
-
 
     }
 
