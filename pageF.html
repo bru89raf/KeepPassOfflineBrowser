@@ -57,8 +57,7 @@
     <div class="col-lg-12">
         <div class="well">
 
-            <form class="form-inline" role="form">
-
+            <div>
                 <button type="button" id="btnOptions" class="btn btn-primary" title="Options" data-toggle="modal"
                         data-target="#optionsModal">
                     <i class="fa fa-desktop"></i>
@@ -68,8 +67,24 @@
                     <i class="fa fa-fire-extinguisher"></i>
                 </button>
 
+                <button type="button" id="btnNewInfo" class="btn btn-success ">
+                    <i class="fa  fa-plus"></i>
+                </button>
+
+                <div class="checkbox btn">
+                    <label>
+                        <input type="checkbox" id="chkboxInBase"> based on this
+                    </label>
+                </div>
+
+            </div>
+
+
+            <form class="form-inline" role="form">
+
+
                 <div class="form-group">
-                    <input class="form-control" id="txtApp" placeholder="App">
+                    <input class="form-control" id="txtApp" placeholder="App" width="200">
                 </div>
 
                 <div class="form-group">
@@ -77,7 +92,17 @@
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" type="password" id="txtPwd" placeholder="Pass">
+                    <!--<input class="form-control" type="password" id="txtPwd" placeholder="Pass" >-->
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="Pass" id="txtPwd">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" id="btnSeePwd">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </button>
+                        </span>
+
+                    </div>
+
                 </div>
 
                 <div class="form-group">
@@ -85,19 +110,8 @@
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" id="txtDesc" placeholder="Desc" style>
+                    <input class="form-control" id="txtDesc" placeholder="Desc">
                 </div>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="chkboxInBase"> based on this
-                    </label>
-                </div>
-
-
-                <button type="button" id="btnNewInfo" class="btn btn-success ">
-                    <i class="fa  fa-plus"></i>
-                </button>
 
 
             </form>
@@ -168,15 +182,23 @@
                         </button>
 
                         <h4>Import Data(CSV) </h4>
-                        <input type="file" id="importfile" class="filestyle"/>
-                        <button class="btn btn-primary btn-sm" id="btnImportFile" onclick="CSVtoJSONConvertor()">
-                            Import File
-                        </button>
+
+
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <input type="file" id="importfile" class="filestyle form-control"/>
+                                <button class="btn btn-primary btn-sm form-control" id="btnImportFile"
+                                        onclick="CSVtoJSONConvertor()">
+                                    Import File
+                                </button>
+                            </div>
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -228,8 +250,9 @@
     var btnImportFile = '#btnImportFile';
     var lableWarningSuccess = '#lableWarningSuccess';
     var lableWarning = '#lableWarning';
-    var lableWarningDanger = '#lableWarningDanger'
+    var lableWarningDanger = '#lableWarningDanger';
     var updateID = '';
+    var btnSeePwd = '#btnSeePwd';
 
     var tableObjDTable = '';
 
@@ -330,9 +353,17 @@
 
         getStorage();
 
+        $(btnSeePwd).hover(
+                function () {
+                    $(txtPwd).attr('type', 'text');
+                }, function () {
+                    $(txtPwd).attr('type', 'password');
+                }
+        );
+
 
         $(btnSaveToFile).on('click', function () {
-            alert('-> File Export <-');
+            alert(' File Export \n See your Download folder.');
 
             var object = JSON.parse(localStorage.getItem('info'));
 
@@ -340,7 +371,6 @@
             if (data == '')
                 return;
 
-//            JSONToCSVConvertor(data, "Vehicle Report", true);
             JSONToCSVConvertor(data, "", true);
 
         });
@@ -515,11 +545,11 @@
     function createTempTHeader() {
         var tblheader = '';
         tblheader += '<thead>';
-        tblheader += '   <th>app</th>';
-        tblheader += '    <th>user</th>';
-        tblheader += '    <th>pass</th>';
-        tblheader += '    <th>location</th>';
-        tblheader += '    <th>desc</th>';
+        tblheader += '   <th>Application</th>';
+        tblheader += '    <th>Uer</th>';
+        tblheader += '    <th>Pass</th>';
+        tblheader += '    <th>Location</th>';
+        tblheader += '    <th>Desc</th>';
         tblheader += '    <th></th>';
         tblheader += '    <th></th>';
         tblheader += '</thead>';
@@ -817,9 +847,7 @@
 
         CSV += row;
 
-
         CSV += ConvertToCSV(arrData);
-
 
         if (CSV == '') {
             alert("Invalid data");
@@ -949,9 +977,9 @@
     function CSVToArray(strData, strDelimiter) {
         strDelimiter = (strDelimiter || ",");
         var objPattern = new RegExp((
-            "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
-            "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
-            "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
+        "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+        "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+        "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
         var arrData = [[]];
         var arrMatches = null;
         while (arrMatches = objPattern.exec(strData)) {
