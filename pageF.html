@@ -594,12 +594,20 @@
         tblbodyline += '<td>';
 
         tblbodyline += '<button type="button" style="width: 100%" class="editLine btn-warning" ';
-        id !== "" ? tblbodyline += ' data-idelement="' + id + '"' : console.log('no data in app -> ');
-        app !== "" ? tblbodyline += ' data-app="' + app + '"' : console.log('no data in app -> ' + i);
-        user != "" ? tblbodyline += ' data-user=' + user : console.log('no data in user -> ' + i);
-        pass != "" ? tblbodyline += ' data-pwd=' + pass : console.log('no data in pass -> ' + i);
-        url != "" ? tblbodyline += ' data-url=' + url : console.log('no data in url -> ' + i);
-        desc != "" ? tblbodyline += ' data-desc=' + desc : console.log('no data in desc -> ' + i);
+//        id !== "" ? tblbodyline += ' data-idelement="' + id + '"' : console.log('no data in app -> ');
+//        app !== "" ? tblbodyline += ' data-app="' + app + '"' : console.log('no data in app -> ' + i);
+//        user != "" ? tblbodyline += ' data-user=' + user : console.log('no data in user -> ' + i);
+//        pass != "" ? tblbodyline += ' data-pwd=' + pass : console.log('no data in pass -> ' + i);
+//        url != "" ? tblbodyline += ' data-url=' + url : console.log('no data in url -> ' + i);
+//        desc != "" ? tblbodyline += ' data-desc=' + desc : console.log('no data in desc -> ' + i);
+
+        id !== "" ? tblbodyline += ' data-idelement="' + id + '"' : '';
+        app !== "" ? tblbodyline += ' data-app="' + app + '"' : '';
+        user != "" ? tblbodyline += ' data-user=' + user : '';
+        pass != "" ? tblbodyline += ' data-pwd=' + pass : '';
+        url != "" ? tblbodyline += ' data-url=' + url : '';
+        desc != "" ? tblbodyline += ' data-desc=' + desc : '';
+
 
         tblbodyline += ' ><i class="fa fa-pencil"> </i>  ';
         tblbodyline += '</button>';
@@ -833,7 +841,6 @@
         return succeed;
     }
 
-
     /* ------------- JSON - CSV - JSON -----------------    */
     var jsonObject = '';
     function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
@@ -887,7 +894,6 @@
         document.body.removeChild(link);
     }
 
-
     function ConvertToCSV(objArray) {
 //        var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
         var array = objArray;
@@ -906,7 +912,6 @@
 
         return str;
     }
-
 
     function CSVtoJSONConvertor() {
 
@@ -948,7 +953,6 @@
                             if (cells[2] != undefined) newLineTemp.pwd = cells[3]; else newLineTemp.pwd = "";
                             if (cells[3] != undefined) newLineTemp.url = cells[4]; else newLineTemp.url = "";
                             if (cells[4] != undefined) newLineTemp.desc = cells[5]; else newLineTemp.desc = "";
-
                         }
 
                         arrayTempImport.push(newLineTemp);
@@ -967,9 +971,6 @@
                 }
                 reader.readAsText(fileUpload.files[0]);
 
-                //console.log(csvArray);
-
-
             } else {
                 alert("This browser does not support HTML5.");
             }
@@ -979,7 +980,6 @@
 
 
     }
-
 
     function CSVToArray(strData, strDelimiter) {
         strDelimiter = (strDelimiter || ",");
@@ -1022,7 +1022,6 @@
         return str;
     }
 
-
     function getDateTime() {
         var dt = new Date();
         var datetime = dt.getDate() + '' + (dt.getMonth() + 1) + "" + dt.getFullYear() + "" + dt.getHours() + "" + dt.getMinutes() + "" + dt.getSeconds();
@@ -1030,13 +1029,11 @@
         return datetime;
     }
 
-
     function verifyFields(app, user) {
         var validate = false;
 
         if (app != "" && user != "")
             validate = true;
-
 
         return validate;
     }
